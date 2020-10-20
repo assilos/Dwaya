@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "870984862497",
+    "firebase_url": "https://dweya-d5bc4.firebaseio.com",
+    "project_id": "dweya-d5bc4",
+    "storage_bucket": "dweya-d5bc4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:870984862497:android:61f0990289b833f113cc60",
+        "android_client_info": {
+          "package_name": "com.example.dweya"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "870984862497-k98mvqql9jgh6s4jg52bivm1hcsnc0t6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBq7EfNv-PbolEFhF15CSIWZe2cMAcNHO8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "870984862497-k98mvqql9jgh6s4jg52bivm1hcsnc0t6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:870984862497:android:18c85c2a2407524413cc60",
+        "android_client_info": {
+          "package_name": "com.odc.dweya"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "870984862497-k98mvqql9jgh6s4jg52bivm1hcsnc0t6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBq7EfNv-PbolEFhF15CSIWZe2cMAcNHO8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "870984862497-k98mvqql9jgh6s4jg52bivm1hcsnc0t6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,4 @@
+background color:#F9F4F4
+primary color: #DE2A5B
+font: Comfortaa (switch between light regular and bold)
+font sizes: multiples of 8 (8,16,24 etc..)
