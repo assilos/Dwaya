@@ -1,7 +1,7 @@
 import 'dart:ui';
 
-import 'package:dweya/controllers/user/liste_controller.dart';
-import 'package:dweya/controllers/user/produit_controller.dart';
+import 'package:Dwaya/controllers/user/liste_controller.dart';
+import 'package:Dwaya/controllers/user/produit_controller.dart';
 import 'package:random_color/random_color.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

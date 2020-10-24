@@ -1,10 +1,10 @@
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
-import 'package:dweya/views/user/components/profil.dart';
-import 'package:dweya/views/user/components/shopping.dart';
-import 'package:dweya/views/user/layouts/main/main_interface.dart';
-import 'package:dweya/views/user/layouts/main/list_tab.dart';
-import 'package:dweya/views/user/components/details_produits.dart';
-import 'package:dweya/views/user/layouts/main/recompenses_screen.dart';
+import 'package:Dwaya/views/user/components/profil.dart';
+import 'package:Dwaya/views/user/components/shopping.dart';
+import 'package:Dwaya/views/user/layouts/main/main_interface.dart';
+import 'package:Dwaya/views/user/layouts/main/list_tab.dart';
+import 'package:Dwaya/views/user/components/details_produits.dart';
+import 'package:Dwaya/views/user/layouts/main/recompenses_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';

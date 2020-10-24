@@ -1,13 +1,14 @@
 import 'dart:async';
 
-import 'package:dweya/controllers/user/produit_controller.dart';
-import 'package:dweya/main.dart';
-import 'package:dweya/models/user/produit.dart';
-import 'package:dweya/views/user/layouts/main/list_tab.dart';
+import 'package:Dwaya/controllers/user/produit_controller.dart';
+import 'package:Dwaya/main.dart';
+import 'package:Dwaya/models/user/produit.dart';
+import 'package:Dwaya/views/user/layouts/main/list_tab.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:dweya/views/user/layouts/main/main_interface.dart';
+import 'package:Dwaya/views/user/layouts/main/main_interface.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 class DetailsProduit extends StatefulWidget {
   DetailsProduit({Key key, this.title}) : super(key: key);
@@ -39,6 +40,8 @@ class _DetailsProduitState extends State<DetailsProduit> {
     initialPage: 0,
   );
   int _currentPage = 0;
+
+
   @override
   void initState() {
     super.initState();
@@ -287,44 +290,109 @@ class _DetailsProduitState extends State<DetailsProduit> {
 class ImageOne extends StatelessWidget {
 
 
-
+  Future<String> getImage()
+  async {
+    final prefs = await SharedPreferences.getInstance();
+    String image =  prefs.get('image') ;
+    return image;
+  }
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.white,
-      child: Image.asset(
-        'assets/images/clamoxyle.png',
-        width: Get.width*0.65,
-        height: Get.height * 0.15,
-      ),
+    return FutureBuilder<String>(
+        future: getImage(),
+        builder: (context, snapshot) {
+          if (snapshot.hasData)
+          {
+            String a = snapshot.data;
+            return Container(
+              color: Colors.white,
+              child:   CachedNetworkImage(
+                placeholder: (context, url) => CircularProgressIndicator(),
+                imageUrl: 'http://272109dd5939.ngrok.io/images/'+a,
+                height: Get.height*0.1,
+                width: Get.width*0.2,
+              )
+              ,
+            );
+
+          }
+          else{
+            return LinearProgressIndicator();
+          }
+        }
     );
   }
 }
 
 class ImageTwo extends StatelessWidget {
+
+
+
+  Future<String> getImage()
+  async {
+    final prefs = await SharedPreferences.getInstance();
+    String image =  prefs.get('image') ;
+    return image;
+  }
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.white,
-      child: Image.asset(
-        'assets/images/clamoxyle.png',
-        width: Get.width*0.65,
-        height: Get.height * 0.15,
-      ),
+    return FutureBuilder<String>(
+      future: getImage(),
+      builder: (context, snapshot) {
+        if (snapshot.hasData)
+          {
+            String a = snapshot.data;
+            return Container(
+              color: Colors.white,
+              child:   CachedNetworkImage(
+                placeholder: (context, url) => CircularProgressIndicator(),
+                imageUrl: 'http://272109dd5939.ngrok.io/images/'+a,
+                height: Get.height*0.1,
+                width: Get.width*0.2,
+              )
+              ,
+            );
+
+          }
+        else{
+          return LinearProgressIndicator();
+        }
+      }
     );
   }
 }
 class ImageThree extends StatelessWidget {
+
+  Future<String> getImage()
+  async {
+    final prefs = await SharedPreferences.getInstance();
+    String image =  prefs.get('image') ;
+    return image;
+  }
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.white,
-      child: Image.asset(
-        'assets/images/clamoxyle.png',
-        width: Get.width*0.65,
-        height: Get.height * 0.15,
+    return FutureBuilder<String>(
+        future: getImage(),
+        builder: (context, snapshot) {
+          if (snapshot.hasData)
+          {
+            String a = snapshot.data;
+            return Container(
+              color: Colors.white,
+              child:   CachedNetworkImage(
+                placeholder: (context, url) => CircularProgressIndicator(),
+                imageUrl: 'http://272109dd5939.ngrok.io/images/'+a,
+                height: Get.height*0.1,
+                width: Get.width*0.2,
+              )
+              ,
+            );
 
-      ),
+          }
+          else{
+            return LinearProgressIndicator();
+          }
+        }
     );
   }
 }

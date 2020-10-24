@@ -1,11 +1,11 @@
-import 'package:dweya/views/user/components/historique_interface.dart';
-import 'package:dweya/views/user/components/profil.dart';
-import 'package:dweya/views/user/components/shopping.dart';
-import 'package:dweya/views/user/layouts/main/main_tab.dart';
-import 'package:dweya/views/user/layouts/main/splach_screen.dart';
-import 'package:dweya/views/user/user_view.dart';
-import 'package:dweya/views/user/components/details_produits.dart';
-import 'package:dweya/views/user/layouts/main/main_interface.dart';
+import 'package:Dwaya/views/user/components/historique_interface.dart';
+import 'package:Dwaya/views/user/components/profil.dart';
+import 'package:Dwaya/views/user/components/shopping.dart';
+import 'package:Dwaya/views/user/layouts/main/main_tab.dart';
+import 'package:Dwaya/views/user/layouts/main/splach_screen.dart';
+import 'package:Dwaya/views/user/user_view.dart';
+import 'package:Dwaya/views/user/components/details_produits.dart';
+import 'package:Dwaya/views/user/layouts/main/main_interface.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -74,7 +74,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      title: 'Dweya',
+      title: 'Dwaya',
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -140,7 +140,7 @@ class _MyHomePageState extends State<MyHomePage> {
     Color mainColor = Color.fromRGBO(249, 244, 244,1.0);
 
     return GetMaterialApp(
-      title: 'dweya',
+      title: 'Dwaya',
       theme: ThemeData(
         // This is the theme of your application.
         //

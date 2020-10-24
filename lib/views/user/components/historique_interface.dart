@@ -1,13 +1,13 @@
 import 'dart:async';
 
-import 'package:dweya/controllers/user/historique_controller.dart';
-import 'package:dweya/main.dart';
-import 'package:dweya/models/user/historique.dart';
-import 'package:dweya/views/user/layouts/main/list_tab.dart';
+import 'package:Dwaya/controllers/user/historique_controller.dart';
+import 'package:Dwaya/main.dart';
+import 'package:Dwaya/models/user/historique.dart';
+import 'package:Dwaya/views/user/layouts/main/list_tab.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:dweya/views/user/layouts/main/main_interface.dart';
+import 'package:Dwaya/views/user/layouts/main/main_interface.dart';
 class HistoriqueListe extends StatefulWidget {
   HistoriqueListe({Key key, this.title}) : super(key: key);
 

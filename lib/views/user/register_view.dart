@@ -1,8 +1,8 @@
-import 'package:dweya/views/user/user_view.dart';
+import 'package:Dwaya/views/user/user_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 // import controller
-import 'package:dweya/controllers/user/user_controller.dart';
+import 'package:Dwaya/controllers/user/user_controller.dart';
 
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 class RegisterView extends StatefulWidget {

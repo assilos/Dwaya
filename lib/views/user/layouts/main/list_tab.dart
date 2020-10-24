@@ -1,9 +1,9 @@
 import 'dart:ui';
 
-import 'package:dweya/controllers/user/liste_controller.dart';
-import 'package:dweya/controllers/user/produit_controller.dart';
-import 'package:dweya/models/user/liste.dart';
-import 'package:dweya/models/user/produit.dart';
+import 'package:Dwaya/controllers/user/liste_controller.dart';
+import 'package:Dwaya/controllers/user/produit_controller.dart';
+import 'package:Dwaya/models/user/liste.dart';
+import 'package:Dwaya/models/user/produit.dart';
 import 'package:random_color/random_color.dart';
 import 'package:flappy_search_bar/search_bar_style.dart';
 import 'package:flutter/material.dart';

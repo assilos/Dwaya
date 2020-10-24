@@ -1,16 +1,16 @@
 {
   "project_info": {
     "project_number": "870984862497",
-    "firebase_url": "https://dweya-d5bc4.firebaseio.com",
-    "project_id": "dweya-d5bc4",
-    "storage_bucket": "dweya-d5bc4.appspot.com"
+    "firebase_url": "https://Dwaya-d5bc4.firebaseio.com",
+    "project_id": "Dwaya-d5bc4",
+    "storage_bucket": "Dwaya-d5bc4.appspot.com"
   },
   "client": [
     {
       "client_info": {
         "mobilesdk_app_id": "1:870984862497:android:61f0990289b833f113cc60",
         "android_client_info": {
-          "package_name": "com.example.dweya"
+          "package_name": "com.example.Dwaya"
         }
       },
       "oauth_client": [
@@ -39,7 +39,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:870984862497:android:18c85c2a2407524413cc60",
         "android_client_info": {
-          "package_name": "com.odc.dweya"
+          "package_name": "com.odc.Dwaya"
         }
       },
       "oauth_client": [

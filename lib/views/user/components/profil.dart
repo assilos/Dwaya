@@ -1,8 +1,8 @@
 import 'dart:ui';
 
-import 'package:dweya/models/user/produit.dart';
-import 'package:dweya/views/user/components/historique_interface.dart';
-import 'package:dweya/views/user/user_view.dart';
+import 'package:Dwaya/models/user/produit.dart';
+import 'package:Dwaya/views/user/components/historique_interface.dart';
+import 'package:Dwaya/views/user/user_view.dart';
 import 'package:flappy_search_bar/search_bar_style.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

@@ -1,6 +1,8 @@
-import 'package:dweya/controllers/user/produit_controller.dart';
-import 'package:dweya/main.dart';
-import 'package:dweya/views/user/layouts/register/registertwo_view.dart';
+import 'dart:typed_data';
+
+import 'package:Dwaya/controllers/user/produit_controller.dart';
+import 'package:Dwaya/main.dart';
+import 'package:Dwaya/views/user/layouts/register/registertwo_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
@@ -10,13 +12,15 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
 // import model
-import 'package:dweya/models/user/user_model.dart';
+import 'package:Dwaya/models/user/user_model.dart';
 // import controller
-import 'package:dweya/controllers/user/user_controller.dart';
+import 'package:Dwaya/controllers/user/user_controller.dart';
 import 'package:dropdown_formfield/dropdown_formfield.dart';
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
-
+import 'package:path/path.dart' as path;
+import 'package:path_provider/path_provider.dart';
 import 'package:get/get.dart';
+import 'package:tesseract_ocr/tesseract_ocr.dart';
 
 class Shopping extends StatelessWidget {
   @override
@@ -143,15 +147,45 @@ class MyCustomFormState extends State<MyCustomForm> {
   File file;
   bool mail = false ;
   bool pwd = false ;
-
+  List<String> users = <String>[
+   'tabelettes',
+   'pillules',
+    'flacon',
+  ];
+  String selectedUser;
+  List<String> users2 = <String>[
+    'Sfax',
+    'Tunisia',
+    'Sousse',
+    'Beja',
+  ];
+  String selectedUser2;
+  String _extractText = 'Unknown';
   Future<File> _choose(String nomm) async {
-    var image  = await ImagePicker.pickImage(source: ImageSource.camera,maxHeight: Get.height*0.05,maxWidth: Get.width*0.7);
+    var image  = await ImagePicker.pickImage(source: ImageSource.camera);
     setState(() {
       file = image;
-      file.rename(nomm);
+
     });
 
  //file = await ImagePicker.pickImage(source: ImageSource.gallery);
+  }
+  Future<void> initPlatformState() async {
+    String extractText;
+    // Platform messages may fail, so we use a try/catch PlatformException.
+    try {
+      print("haw text");
+      String text = await TesseractOcr.extractText(file.path,language:'eng');
+      print("haw text");
+      print(text);
+    } on PlatformException {
+      extractText = 'Failed to extract text';
+    }
+
+    // If the widget was removed from the tree while the asynchronous platform
+    // message was in flight, we want to discard the reply rather than calling
+    // setState to update our non-existent appearance.
+
   }
 
   @override
@@ -231,6 +265,7 @@ class MyCustomFormState extends State<MyCustomForm> {
                                 maxWidth: 300,
                               ),
                               child: TextFormField(
+
                                 keyboardType: TextInputType.text,
                                 controller: descController,
                                 cursorColor:  secondColor,
@@ -267,43 +302,41 @@ class MyCustomFormState extends State<MyCustomForm> {
                             color: Colors.white,
                             height: Get.height/25,
                           ),
-                          ConstrainedBox(
-                            constraints: BoxConstraints(
-                              minWidth: 300,
-                              maxWidth: 300,
-                            ),
-                            child:DropDownFormField(
-                              filled: true,
+                          Padding(
+                            padding: EdgeInsets.only(left: 12.0),
+                            child: ConstrainedBox(
+                              constraints: BoxConstraints(
+                                minWidth: 300,
+                                maxWidth: 300,
+                              ),
+                              child:DropdownButton<String>(
 
-                              titleText: 'Unité',
-                              hintText: 'Veuillez choisir une unité',
-                              value: _unite,
-                              onSaved: (value) {
-                                setState(() {
-                                  _civilite = value;
-                                });
-                              },
-                              onChanged: (value) {
-                                setState(() {
-                                  _civilite = value;
-                                });
-                              },
-                              dataSource: [
-                                {
-                                  "display": "Mademoiselle",
-                                  "value": "Mademoiselle",
+                                icon: Icon(Icons.healing),
+                                iconEnabledColor: secondColor,
+                                dropdownColor: secondColor,
+                                isExpanded: true,
+                                isDense: true,
+                                hint:  Text("Unité",style: TextStyle(color: secondColor)),
+                                value: selectedUser,
+                                onChanged: (String Value) {
+                                  setState(() {
+                                    selectedUser = Value;
+                                  });
                                 },
-                                {
-                                  "display": "Madame",
-                                  "value": "Madame",
-                                },
-                                {
-                                  "display": "Monsieur",
-                                  "value": "Monsieur",
-                                },
-                              ],
-                              textField: 'display',
-                              valueField: 'value',
+                                items: users.map((String user) {
+                                  return  DropdownMenuItem<String>(
+                                    value: user,
+                                    child: Row(
+                                      children: <Widget>[
+                                        Text(
+                                          user,
+                                          style:  TextStyle(color: Colors.black),
+                                        ),
+                                      ],
+                                    ),
+                                  );
+                                }).toList(),
+                              ),
                             ),
                           ),
                           Divider(
@@ -353,41 +386,40 @@ class MyCustomFormState extends State<MyCustomForm> {
                     height: MediaQuery.of(context).size.height/35,
                      )
                           ,
-                          ConstrainedBox(
-                            constraints: BoxConstraints(
-                              minWidth: 300,
-                              maxWidth: 300,
-                            ),
-                            child:DropDownFormField(
-                              titleText: 'Lieu',
-                              hintText: 'Veuillez choisir votre lieu',
-                              value: _lieu,
-                              onSaved: (value) {
-                                setState(() {
-                                  _civilite = value;
-                                });
-                              },
-                              onChanged: (value) {
-                                setState(() {
-                                  _civilite = value;
-                                });
-                              },
-                              dataSource: [
-                                {
-                                  "display": "Mademoiselle",
-                                  "value": "Mademoiselle",
+                          Padding(
+                            padding: EdgeInsets.only(left: 12.0),
+                            child: ConstrainedBox(
+                              constraints: BoxConstraints(
+                                minWidth: 300,
+                                maxWidth: 300,
+                              ),
+                              child:DropdownButton<String>(
+                                icon: Icon(Icons.location_on),
+                                iconEnabledColor: secondColor,
+                                dropdownColor: secondColor,
+                                isExpanded: true,
+                                isDense: true,
+                                hint:  Text("Lieu",style: TextStyle(color: secondColor)),
+                                value: selectedUser2,
+                                onChanged: (String Value) {
+                                  setState(() {
+                                    selectedUser2 = Value;
+                                  });
                                 },
-                                {
-                                  "display": "Madame",
-                                  "value": "Madame",
-                                },
-                                {
-                                  "display": "Monsieur",
-                                  "value": "Monsieur",
-                                },
-                              ],
-                              textField: 'display',
-                              valueField: 'value',
+                                items: users2.map((String user) {
+                                  return  DropdownMenuItem<String>(
+                                    value: user,
+                                    child: Row(
+                                      children: <Widget>[
+                                        Text(
+                                          user,
+                                          style:  TextStyle(color: Colors.black),
+                                        ),
+                                      ],
+                                    ),
+                                  );
+                                }).toList(),
+                              ),
                             ),
                           ),
                           Divider(
@@ -396,7 +428,7 @@ class MyCustomFormState extends State<MyCustomForm> {
                           ),
                           file == null
                               ? Text('Veuillez choisir une image')
-                              : Image.file(file),
+                              : Image.file(file,height: Get.height*0.05,width: Get.width*0.3,),
                           Divider(
                             color: Colors.white,
                             height: MediaQuery.of(context).size.height/15,
@@ -438,9 +470,6 @@ class MyCustomFormState extends State<MyCustomForm> {
                     ),
                 ],
               ),
-             // file == null
-               //   ? Text('No Image Selected')
-                 // : Image.file(file)
             ],
         ),
                           Divider(
@@ -475,10 +504,11 @@ class MyCustomFormState extends State<MyCustomForm> {
                               if (_formKey.currentState.validate()) {
                                 // If the form is valid, display a snackbar. In the real world,
                                 // you'd often call a server or save the information in a database.
-                                ctrl.Upload(file);
-                              await  ctrl.AjouterOffre(nomController.text,nomController.text,_lieu,_unite,23,quantController.text,descController.text);
+                               await ctrl.Upload(file,nomController.text+'23');
 
-                            Get.snackbar('Succés ', 'Offre ajouté',colorText: Colors.white,icon: Icon(Icons.check),duration: Duration(seconds: 3),backgroundColor: Colors.green);
+
+                                await  ctrl.AjouterOffre(nomController.text,nomController.text+'23.jpg',selectedUser2,selectedUser,23,quantController.text,descController.text);
+                               Get.snackbar('Succés ', 'Votre offre a été ajouté',colorText: Colors.white,icon: Icon(Icons.check),duration: Duration(seconds: 3),backgroundColor: Colors.green);
                               }
                               // Validate returns true if the form is valid, otherwise false.
 
@@ -522,11 +552,26 @@ class MyCustomForm2State extends State<MyCustomForm2> {
   File file;
   bool mail = false ;
   bool pwd = false ;
-
+  List<String> users = <String>[
+    'tabelettes',
+    'pillules',
+    'flacon',
+  ];
+  String selectedUser;
+  List<String> users2 = <String>[
+    'Sfax',
+    'Tunisia',
+    'Sousse',
+    'Beja',
+  ];
+  String selectedUser2;
   Future<File> _choose() async {
     var image  = await ImagePicker.pickImage(source: ImageSource.camera,maxHeight: Get.height*0.05,maxWidth: Get.width*0.7);
     setState(() {
       file = image;
+      String dir = path.dirname(file.path);
+      String newPath = path.join(dir, 'marouene.jpg');
+      file.renameSync(newPath);
     });
 
     //file = await ImagePicker.pickImage(source: ImageSource.gallery);
@@ -644,41 +689,40 @@ class MyCustomForm2State extends State<MyCustomForm2> {
                             color: Colors.white,
                             height: Get.height/25,
                           ),
-                          ConstrainedBox(
-                            constraints: BoxConstraints(
-                              minWidth: 300,
-                              maxWidth: 300,
-                            ),
-                            child:DropDownFormField(
-                              titleText: 'Unité',
-                              hintText: 'Veuillez choisir une unité',
-                              value: _unite,
-                              onSaved: (value) {
-                                setState(() {
-                                  _unite = value;
-                                });
-                              },
-                              onChanged: (value) {
-                                setState(() {
-                                  _unite = value;
-                                });
-                              },
-                              dataSource: [
-                                {
-                                  "display": "tabelettes",
-                                  "value": "tabelettes",
+                          Padding(
+                            padding: EdgeInsets.only(left: 12.0),
+                            child: ConstrainedBox(
+                              constraints: BoxConstraints(
+                                minWidth: 300,
+                                maxWidth: 300,
+                              ),
+                              child:DropdownButton<String>(
+                                icon: Icon(Icons.healing),
+                                iconEnabledColor: secondColor,
+                                dropdownColor: secondColor,
+                                isExpanded: true,
+                                isDense: true,
+                                hint:  Text("Unité",style: TextStyle(color: secondColor)),
+                                value: selectedUser,
+                                onChanged: (String Value) {
+                                  setState(() {
+                                    selectedUser = Value;
+                                  });
                                 },
-                                {
-                                  "display": "Flacons",
-                                  "value": "Flacons",
-                                },
-                                {
-                                  "display": "Packets",
-                                  "value": "Packets",
-                                },
-                              ],
-                              textField: 'value',
-                              valueField: 'value',
+                                items: users.map((String user) {
+                                  return  DropdownMenuItem<String>(
+                                    value: user,
+                                    child: Row(
+                                      children: <Widget>[
+                                        Text(
+                                          user,
+                                          style:  TextStyle(color: Colors.black),
+                                        ),
+                                      ],
+                                    ),
+                                  );
+                                }).toList(),
+                              ),
                             ),
                           ),
                           Divider(
@@ -728,77 +772,40 @@ class MyCustomForm2State extends State<MyCustomForm2> {
                             height: MediaQuery.of(context).size.height/35,
                           )
                           ,
-                          ConstrainedBox(
-                            constraints: BoxConstraints(
-                              minWidth: 300,
-                              maxWidth: 300,
-                            ),
-                            child:DropDownFormField(
-                              titleText: 'Lieu',
-                              hintText: 'Veuillez choisir votre gouverorat',
-                              value: _lieu,
-                              onSaved: (value) {
-                                setState(() {
-                                  _lieu = value;
-                                });
-                              },
-                              onChanged: (value) {
-                                setState(() {
-                                  _lieu = value;
-                                });
-                              },
-                              dataSource: [
-                                {
-                                  "display": "Tunis",
-                                  "value": "Tunis",
+                          Padding(
+                            padding: EdgeInsets.only(left: 12.0),
+                            child: ConstrainedBox(
+                              constraints: BoxConstraints(
+                                minWidth: 300,
+                                maxWidth: 300,
+                              ),
+                              child:DropdownButton<String>(
+                                icon: Icon(Icons.location_on),
+                                iconEnabledColor: secondColor,
+                                dropdownColor: secondColor,
+                                isExpanded: true,
+                                isDense: true,
+                                hint:  Text("Lieu",style: TextStyle(color: secondColor)),
+                                value: selectedUser2,
+                                onChanged: (String Value) {
+                                  setState(() {
+                                    selectedUser2 = Value;
+                                  });
                                 },
-                                {
-                                  "display": "Sousse",
-                                  "value": "Sousse",
-                                },
-                                {
-                                  "display": "Beja",
-                                  "value": "Beja",
-                                },
-                                {
-                                  "display": "Bizerte",
-                                  "value": "Bizerte",
-                                },
-                                {
-                                  "display": "Nabeul",
-                                  "value": "Nabeul",
-                                },
-                                {
-                                  "display": "Kef",
-                                  "value": "Kef",
-                                },
-                                {
-                                  "display": "Jendouba",
-                                  "value": "Jendouba",
-                                },
-                                {
-                                  "display": "Kef",
-                                  "value": "Kef",
-                                },
-                                {
-                                  "display": "Monsatir",
-                                  "value": "Monsatir",
-                                },
-                                {
-                                  "display": "Sfax",
-                                  "value": "Sfax",
-                                },
-                                {
-                                  "display": "Kairouan",
-                                  "value": "Kairouan",
-                                },
-                                {
-                                  "display": "Zaghouane",
-                                  "value": "Zaghouane",
-                                },
-                              ],
-                              textField: 'value',
-                              valueField: 'value',
+                                items: users2.map((String user) {
+                                  return  DropdownMenuItem<String>(
+                                    value: user,
+                                    child: Row(
+                                      children: <Widget>[
+                                        Text(
+                                          user,
+                                          style:  TextStyle(color: Colors.black),
+                                        ),
+                                      ],
+                                    ),
+                                  );
+                                }).toList(),
+                              ),
                             ),
                           ),
                           Divider(
@@ -806,7 +813,7 @@ class MyCustomForm2State extends State<MyCustomForm2> {
                             height: Get.height/35,
                           ),
                           file == null
-                              ? Text('Veuillz uplader votre ordonnance')
+                              ? Text('Veuillz uploader votre ordonnance')
                               : Image.file(file),
                           Divider(
                             color: Colors.white,
@@ -882,10 +889,17 @@ class MyCustomForm2State extends State<MyCustomForm2> {
                                 borderRadius: BorderRadius.circular(24)
                             ),
                             onPressed: () async {
-                              ctrl.Upload(file);
-                              await  ctrl.AjouterDemande(nomController.text,nomController.text,_lieu,_unite,23,quantController.text,descController.text);
+                              if (_formKey.currentState.validate()) {
+                                // If the form is valid, display a snackbar. In the real world,
+                                // you'd often call a server or save the information in a database.
+                                Get.snackbar('Désolé ', 'Veuillez vérifier votre ordonnance',isDismissible: true);
 
-                              Get.snackbar('Succés ', 'Demande ajouté',colorText: Colors.white,icon: Icon(Icons.check),duration: Duration(seconds: 3),backgroundColor: Colors.green);
+                                await ctrl.Upload(file,nomController.text+'23');
+                                print("haw kmel");
+                                await   ctrl.VerifyOCR(nomController.text+'23'+'.jpg')? await  ctrl.AjouterDemande(nomController.text,nomController.text+'23.jpg',selectedUser2,selectedUser,23,quantController.text,descController.text).then((value) => Get.snackbar('Succés ', 'Offre ajouté',colorText: Colors.white,icon: Icon(Icons.check),duration: Duration(seconds: 15),backgroundColor: Colors.green)
+                                ): Get.snackbar('Désolé ', 'Veuillez vérifier votre ordonnance',colorText: Colors.white,icon: Icon(Icons.check),duration: Duration(seconds: 15),backgroundColor: Colors.green,snackPosition:SnackPosition.BOTTOM );
+
+                              }
                               // Validate returns true if the form is valid, otherwise false.
 
                             },

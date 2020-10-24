@@ -1,16 +1,16 @@
-import 'package:dweya/main.dart';
-import 'package:dweya/views/user/components/profil.dart';
-import 'package:dweya/views/user/layouts/main/main_tab.dart';
-import 'package:dweya/views/user/layouts/register/registerone_view.dart';
-import 'package:dweya/views/user/layouts/register/registertwo_view.dart';
-import 'package:dweya/views/user/register_view.dart';
+import 'package:Dwaya/main.dart';
+import 'package:Dwaya/views/user/components/profil.dart';
+import 'package:Dwaya/views/user/layouts/main/main_tab.dart';
+import 'package:Dwaya/views/user/layouts/register/registerone_view.dart';
+import 'package:Dwaya/views/user/layouts/register/registertwo_view.dart';
+import 'package:Dwaya/views/user/register_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 // import model
-import 'package:dweya/models/user/user_model.dart';
+import 'package:Dwaya/models/user/user_model.dart';
 // import controller
-import 'package:dweya/controllers/user/user_controller.dart';
+import 'package:Dwaya/controllers/user/user_controller.dart';
 import 'package:get/get.dart';
 class UserView extends StatelessWidget {
   @override

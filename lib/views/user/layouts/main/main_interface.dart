@@ -1,15 +1,18 @@
 import 'dart:async';
+import 'dart:io';
 
-import 'package:dweya/controllers/user/produit_controller.dart';
-import 'package:dweya/models/user/demande.dart';
-import 'package:dweya/models/user/offre.dart';
-import 'package:dweya/models/user/produit.dart';
+import 'package:Dwaya/controllers/user/produit_controller.dart';
+import 'package:Dwaya/models/user/demande.dart';
+import 'package:Dwaya/models/user/offre.dart';
+import 'package:Dwaya/models/user/produit.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-import 'package:dweya/views/user/components/details_produits.dart';
+import 'package:Dwaya/views/user/components/details_produits.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 
 class MainInterface extends StatefulWidget {
   MainInterface({Key key, this.title}) : super(key: key);
@@ -321,6 +324,7 @@ async {
             children: List.generate(data.length, (index) {
               return Center(
                 child: Container(
+
                   height: Get.height*0.40,
                   width: Get.width*0.47,
                   child: Card(
@@ -339,19 +343,30 @@ async {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text(
-                            data[index].nommedicament,
-                            style: TextStyle(
-                              fontSize: 15.0,
-                              color: Colors.black,
+                          Padding(
+                            padding:  EdgeInsets.only(top: 2.0),
+                            child: Text(
+                              data[index].nommedicament,
+                              style: TextStyle(
+                                fontSize: 15.0,
+                                color: Colors.black,
+                              ),
+                              textAlign: TextAlign.center,
+                              maxLines: 2,
                             ),
-                            textAlign: TextAlign.center,
-                            maxLines: 2,
                           ),
-                          Image.asset(
-                            'assets/images/'+data[index].image,
-                            width: Get.width * 0.30,
-                            height: Get.height * 0.13,
+                          Divider(height: Get.height*0.02,
+                            color: mainColor,
+                          ),
+                      CachedNetworkImage(
+                        placeholder: (context, url) => CircularProgressIndicator(),
+                        imageUrl: 'http://00f9b585971b.ngrok.io/images/'+data[index].image,
+                        height: Get.height*0.1,
+                        width: Get.width*0.2,
+                      )
+                      ,
+                          Divider(height: Get.height*0.01,
+                            color: mainColor,
                           ),
                           Text(
                             data[index].description,
@@ -360,6 +375,9 @@ async {
                               color: Colors.black,
                             ),
                             textAlign: TextAlign.center,
+                          ),
+                          Divider(height: Get.height*0.02,
+                            color: mainColor,
                           ),
                           Row(
                             children: [

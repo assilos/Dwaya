@@ -1,8 +1,8 @@
 import 'dart:async';
 
-import 'package:dweya/controllers/user/produit_controller.dart';
-import 'package:dweya/models/user/produit.dart';
-import 'package:dweya/views/user/layouts/main/main_tab.dart';
+import 'package:Dwaya/controllers/user/produit_controller.dart';
+import 'package:Dwaya/models/user/produit.dart';
+import 'package:Dwaya/views/user/layouts/main/main_tab.dart';
 import 'package:flappy_search_bar/search_bar_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

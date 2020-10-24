@@ -1,21 +1,22 @@
 import 'dart:io';
 
-import 'package:dweya/models/user/demande.dart';
-import 'package:dweya/models/user/offre.dart';
-import 'package:dweya/models/user/produit.dart';
+import 'package:Dwaya/models/user/demande.dart';
+import 'package:Dwaya/models/user/offre.dart';
+import 'package:Dwaya/models/user/produit.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:provider/provider.dart';
 // import model
-import 'package:dweya/models/user/user_model.dart';
+import 'package:Dwaya/models/user/user_model.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'package:get/get.dart';
+import 'package:tesseract_ocr/tesseract_ocr.dart';
 class ProduitController extends GetxController{
   ProduitController();
-  String url='http://fb1b377434e9.ngrok.io' ;
+  String url='http://00f9b585971b.ngrok.io' ;
   int a = 0;
   void getter(BuildContext context) {
     UserModel viewModel = Provider.of<UserModel>(context, listen: false);
@@ -33,6 +34,7 @@ class ProduitController extends GetxController{
     //TODO Add code here for remove
     viewModel.remove();
   }
+
   Future<List<Offre>> Offres () async {
 
    final response =  await http.get(url+'/api/afficher') ;
@@ -59,9 +61,29 @@ class ProduitController extends GetxController{
       throw Exception('Failed to load jobs from API');
     }
   }
+  Future<bool> VerifyOCR(String image) async {
+    print('VerifyOCR');
+    var response = await http.post(url+'/api/ocr',body:{'image':image});
+    print(response.statusCode);
+    print('Response status: ${response.statusCode}');
+    print('Response body: ${response.body.toString()}');
+    String ordonnance = response.body.toString();
+
+    if (ordonnance.contains('image'))
+      {
+        return true;
+      }
+    return false ;
+
+//check if mail is correct
+    //if mail is correct check if password is correct
+    //JSON DECODERidu
+    //   });
+    // LOGIN GET REQUEST IS HERE
+  }
   Future<bool> AjouterOffre (String nommedicament,String image,String lieu,String unite,int iduser,String quantite,String description) async {
     print('Login info');
-    var response = await http.post(url+'/api/ajouter',body:{'image':'dd','nommedicament':'dd','description':'dd','quantite':'34','unite':'dd','lieu':'dd'
+    var response = await http.post(url+'/api/ajouter',body:{'image':image,'nommedicament':nommedicament,'description':description,'quantite':quantite,'unite':'tabelettes','lieu':'dd'
       ,'iduser':'23','rayon':'123'});
     print(response.statusCode);
     print('Response status: ${response.statusCode}');
@@ -74,7 +96,7 @@ class ProduitController extends GetxController{
   }
   Future<bool> AjouterDemande (String nommedicament,String image,String lieu,String unite,int iduser,String quantite,String description) async {
     print('Login info');
-    var response = await http.post(url+'/api/ajouterDemande',body:{'image':'dd','nommedicament':'dd','description':'dd','quantite':'34','unite':'dd','lieu':'dd'
+    var response = await http.post(url+'/api/ajouterDemande',body:{'image':image,'nommedicament':nommedicament,'description':description,'quantite':quantite,'unite':'tabelettes','lieu':'dd'
       ,'iduser':'23','rayon':'123'});
     print(response.statusCode);
     print('Response status: ${response.statusCode}');
@@ -85,14 +107,14 @@ class ProduitController extends GetxController{
     //   });
     // LOGIN GET REQUEST IS HERE
   }
-  Future<void> Upload(File file) async {
+  Future<void> Upload(File file,String nom) async {
     print('upload');
     if (file == null) print('null');
 
     var request = http.MultipartRequest(
         "POST", Uri.parse(url+'/api/image'));
     var multipartFile = await http.MultipartFile.fromPath(
-        "picture", file.path);
+        "picture", file.path,filename: nom+'.jpg');
     request.files.add(multipartFile);
     http.StreamedResponse response = await request.send();
   }

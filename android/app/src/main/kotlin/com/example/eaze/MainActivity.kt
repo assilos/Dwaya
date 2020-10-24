@@ -1,4 +1,4 @@
-package com.odc.dweya
+package com.odc.Dwaya
 
 import io.flutter.embedding.android.FlutterActivity
 
