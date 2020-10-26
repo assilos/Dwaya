@@ -13,10 +13,9 @@ import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'package:get/get.dart';
-import 'package:tesseract_ocr/tesseract_ocr.dart';
 class ProduitController extends GetxController{
   ProduitController();
-  String url='http://00f9b585971b.ngrok.io' ;
+  String url='http://34dff27deb3a.ngrok.io' ;
   int a = 0;
   void getter(BuildContext context) {
     UserModel viewModel = Provider.of<UserModel>(context, listen: false);

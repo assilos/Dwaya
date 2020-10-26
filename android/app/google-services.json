@@ -1,63 +1,34 @@
 {
   "project_info": {
-    "project_number": "870984862497",
-    "firebase_url": "https://Dwaya-d5bc4.firebaseio.com",
-    "project_id": "Dwaya-d5bc4",
-    "storage_bucket": "Dwaya-d5bc4.appspot.com"
+    "project_number": "656697163655",
+    "firebase_url": "https://dwaya-5840e.firebaseio.com",
+    "project_id": "dwaya-5840e",
+    "storage_bucket": "dwaya-5840e.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:870984862497:android:61f0990289b833f113cc60",
-        "android_client_info": {
-          "package_name": "com.example.Dwaya"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "870984862497-k98mvqql9jgh6s4jg52bivm1hcsnc0t6.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyBq7EfNv-PbolEFhF15CSIWZe2cMAcNHO8"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "870984862497-k98mvqql9jgh6s4jg52bivm1hcsnc0t6.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:870984862497:android:18c85c2a2407524413cc60",
+        "mobilesdk_app_id": "1:656697163655:android:35c2d7523374de9ec6dd22",
         "android_client_info": {
           "package_name": "com.odc.Dwaya"
         }
       },
       "oauth_client": [
         {
-          "client_id": "870984862497-k98mvqql9jgh6s4jg52bivm1hcsnc0t6.apps.googleusercontent.com",
+          "client_id": "656697163655-c3etgdi04ek57l0udunkn4sjhf6mmaac.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBq7EfNv-PbolEFhF15CSIWZe2cMAcNHO8"
+          "current_key": "AIzaSyAy2dWCQusiNV6iAmdZ7CT8rXszIkZIaI0"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "870984862497-k98mvqql9jgh6s4jg52bivm1hcsnc0t6.apps.googleusercontent.com",
+              "client_id": "656697163655-c3etgdi04ek57l0udunkn4sjhf6mmaac.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

@@ -7,9 +7,10 @@ import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'package:get/get.dart';
+import 'package:stream_chat_flutter/stream_chat_flutter.dart';
 class UserController extends GetxController{
   UserController();
-  String url='http://13af34dc88f0.ngrok.io' ;
+  String url='http://34dff27deb3a.ngrok.io' ;
   void getter(BuildContext context) {
     UserModel viewModel = Provider.of<UserModel>(context, listen: false);
     //TODO Add code here for getter
@@ -35,6 +36,19 @@ class UserController extends GetxController{
       print('fares') ;
      return false ;
     }
+  }
+Future<String> token (Client _client)async
+  {
+    var response = await http.post(url+'/api/token',body:{'userId':'marou'});
+
+    var userToken = jsonDecode(response.body)['token'];
+
+    print('token');
+    print(userToken);
+
+
+return userToken ;
+
   }
   Future<bool> Login  (String mail,String password ) async {
   //var url = 'http://8a8f1c94fea0.ngrok.io/';

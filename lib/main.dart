@@ -1,3 +1,4 @@
+import 'package:Dwaya/controllers/user/user_controller.dart';
 import 'package:Dwaya/views/user/components/historique_interface.dart';
 import 'package:Dwaya/views/user/components/profil.dart';
 import 'package:Dwaya/views/user/components/shopping.dart';
@@ -11,6 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:stream_chat_flutter/stream_chat_flutter.dart';
 void main() {
   runApp(MyApp());
 }
@@ -19,6 +21,8 @@ class MyApp extends StatefulWidget {
   _MyAppState createState() => _MyAppState();
 }
 class _MyAppState extends State<MyApp> {
+  final _client = Client('mcjpy234txqp', logLevel: Level.INFO);
+  UserController ctrl = new UserController() ;
 
   //Future checkIfLoggedIn;
  // final Future<FirebaseApp> _initialization = Firebase.initializeApp();
@@ -34,6 +38,7 @@ class _MyAppState extends State<MyApp> {
 
     //flutterLocalNotificationsPlugin.initialize(initSetttings);
   //  scheduleNotification() ;
+    ctrl.token(_client);
     super.initState();
 
   }
