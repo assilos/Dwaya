@@ -1,8 +1,13 @@
+import 'package:dwaya/classes/user_class.dart';
 import 'package:dwaya/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class ProfilePage extends StatefulWidget {
+  final User user;
+  ProfilePage({this.user});
   @override
   MapScreenState createState() => MapScreenState();
 }
@@ -19,6 +24,13 @@ class MapScreenState extends State<ProfilePage>
 
   @override
   Widget build(BuildContext context) {
+    String valEmail = widget.user.email;
+
+    TextEditingController txt = TextEditingController()..text = valEmail;
+    String numTel;
+    String nom;
+    String adresse;
+    String email;
     return new Scaffold(
         body: new Container(
       color: Colors.white,
@@ -160,6 +172,9 @@ class MapScreenState extends State<ProfilePage>
                                       hintText: "Enter Your Name",
                                       fillColor: kPrimaryLightColor,
                                       hoverColor: kPrimaryColor),
+                                  onChanged: (value) {
+                                    nom = value;
+                                  },
                                   enabled: !_status,
                                   autofocus: !_status,
                                 ),
@@ -194,8 +209,13 @@ class MapScreenState extends State<ProfilePage>
                             children: <Widget>[
                               new Flexible(
                                 child: new TextField(
+                                  controller: txt,
                                   decoration: const InputDecoration(
-                                      hintText: "Enter Email ID"),
+                                    hintText: "Enter Email ID",
+                                  ),
+                                  onChanged: (value) {
+                                    email = value;
+                                  },
                                   enabled: !_status,
                                 ),
                               ),
@@ -231,6 +251,9 @@ class MapScreenState extends State<ProfilePage>
                                 child: new TextField(
                                   decoration: const InputDecoration(
                                       hintText: "Enter Mobile Number"),
+                                  onChanged: (value) {
+                                    numTel = value;
+                                  },
                                   enabled: !_status,
                                 ),
                               ),
@@ -266,12 +289,17 @@ class MapScreenState extends State<ProfilePage>
                                 child: new TextField(
                                   decoration: const InputDecoration(
                                       hintText: "Enter City"),
+                                  onChanged: (value) {
+                                    adresse = value;
+                                  },
                                   enabled: !_status,
                                 ),
                               ),
                             ],
                           )),
-                      !_status ? _getActionButtons() : new Container(),
+                      !_status
+                          ? _getActionButtons(valEmail, noml, adressel, numTell)
+                          : new Container(),
                     ],
                   ),
                 ),
@@ -290,7 +318,8 @@ class MapScreenState extends State<ProfilePage>
     super.dispose();
   }
 
-  Widget _getActionButtons() {
+  Widget _getActionButtons(
+      String email, String nom, String adresse, String numTel) {
     return Padding(
       padding: EdgeInsets.only(left: 25.0, right: 25.0, top: 45.0),
       child: new Row(
@@ -306,6 +335,7 @@ class MapScreenState extends State<ProfilePage>
                 textColor: Colors.white,
                 color: Colors.green,
                 onPressed: () {
+                  updateProfil(email, nom, adresse, numTel);
                   setState(() {
                     _status = true;
                     FocusScope.of(context).requestFocus(new FocusNode());
@@ -359,5 +389,26 @@ class MapScreenState extends State<ProfilePage>
         });
       },
     );
+  }
+}
+
+updateProfil(email, nom, adresse, numTel) async {
+  var url = "http://10.0.2.2:3001/api/user/updateProfil"; // iOS
+  final http.Response response = await http.post(
+    url,
+    headers: <String, String>{
+      'Content-Type': 'application/json; charset=UTF-8',
+    },
+    body: jsonEncode(<String, String>{
+      'email': email,
+      'nom': nom,
+      'adresse': adresse,
+      'numTel': numTel,
+    }),
+  );
+
+  if (response.statusCode == 200) {
+  } else {
+    print(response.body);
   }
 }

@@ -30,10 +30,6 @@ dependencies:
   flutter_svg: 0.18.0
   http: ^0.12.0+4
   rflutter_alert: ^1.1.0
-  camera: ^0.5.2+1
-  path_provider: ^1.1.0
-  path: ^1.6.2
-  esys_flutter_share: ^1.0.2
 
 dev_dependencies:
   flutter_test:

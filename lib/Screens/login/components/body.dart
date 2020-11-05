@@ -1,5 +1,6 @@
 import 'package:dwaya/Screens/Signup/signup_screen.dart';
 import 'package:dwaya/Screens/profil/profil_page.dart';
+import 'package:dwaya/classes/user_class.dart';
 import 'package:dwaya/components/AlreadyHaveAnAccountChecked.dart';
 import 'package:dwaya/components/rounded_button.dart';
 import 'package:dwaya/components/rounded_input_field.dart';
@@ -90,15 +91,16 @@ class _BodyState extends State<Body> {
         'password': password,
       }),
     );
+
     print(response.body);
     if (response.statusCode == 200) {
+      final user = User(email: email);
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) {
-            return ProfilePage();
-          },
-        ),
+            builder: (context) => ProfilePage(
+                  user: user,
+                )),
       );
     } else {
       message(context);
