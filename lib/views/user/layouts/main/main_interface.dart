@@ -5,6 +5,7 @@ import 'package:Dwaya/controllers/user/produit_controller.dart';
 import 'package:Dwaya/models/user/demande.dart';
 import 'package:Dwaya/models/user/offre.dart';
 import 'package:Dwaya/models/user/produit.dart';
+import 'package:Dwaya/views/user/components/details_demande.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -428,6 +429,19 @@ class _ProduitsTwoState extends State<ProduitsTwo> {
   void initState() {
     super.initState();
   }
+  Future<void> toDetails(String nom ,String desc ,String price ,String image,String category,String barcode)
+  async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setString('nomP',nom) ;
+    prefs.setString('desc',desc) ;
+    prefs.setString('price',price) ;
+    prefs.setString('image',image) ;
+    prefs.setString('category',category) ;
+    prefs.setString('barcode',barcode) ;
+
+
+    Get.to(DetailsDemande(),transition: Transition.fade);
+  }
   @override
   Widget build(BuildContext context) => FutureBuilder(
     future: ctrl.Demandes(),
@@ -462,16 +476,7 @@ class _ProduitsTwoState extends State<ProduitsTwo> {
                     elevation: 10.0,
                     color: mainColor,
                     child: InkWell(
-                      onTap: ()=> showDialog(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return Dialog(
-                              shape: RoundedRectangleBorder(
-                                  borderRadius:
-                                  BorderRadius.circular(20.0)), //this right here
-                              child:DetailsProduit(),
-                            );
-                          }),
+                      onTap: ()=>toDetails(data[index].nommedicament,data[index].description,data[index].datePublication.substring(0,10),data[index].image,data[index].lieu,data[index].unite),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [

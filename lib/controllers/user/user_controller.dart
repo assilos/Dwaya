@@ -10,7 +10,7 @@ import 'package:get/get.dart';
 import 'package:stream_chat_flutter/stream_chat_flutter.dart';
 class UserController extends GetxController{
   UserController();
-  String url='http://34dff27deb3a.ngrok.io' ;
+  String url='http://0c65f564b634.ngrok.io' ;
   void getter(BuildContext context) {
     UserModel viewModel = Provider.of<UserModel>(context, listen: false);
     //TODO Add code here for getter

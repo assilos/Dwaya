@@ -15,7 +15,7 @@ import 'package:http/http.dart' as http;
 import 'package:get/get.dart';
 class ProduitController extends GetxController{
   ProduitController();
-  String url='http://34dff27deb3a.ngrok.io' ;
+  String url='http://0c65f564b634.ngrok.io' ;
   int a = 0;
   void getter(BuildContext context) {
     UserModel viewModel = Provider.of<UserModel>(context, listen: false);
@@ -54,6 +54,33 @@ class ProduitController extends GetxController{
       List jsonResponse = json.decode(response.body);
       print('oyoy');
       //  print(jsonResponse[0]['results']);
+      List a = jsonResponse[0]['results'] ;
+      return a.map((job) => new Demande.fromJson(job)).toList();
+    } else {
+      throw Exception('Failed to load jobs from API');
+    }
+  }
+  Future<int> Urgence (String nom) async {
+
+    final response =  await http.post(url+'/api/urgence',body:{'nom':nom}) ;
+    if (response.statusCode == 200) {
+      List jsonResponse = json.decode(response.body);
+      print('urgence');
+        print(jsonResponse[0]);
+      List a = jsonResponse[0]['results'] ;
+      int count = a[0]['number'] ;
+ return count ;
+    } else {
+      throw Exception('Failed to load jobs from API');
+    }
+  }
+  Future<List<Demande>> Autres (String nom) async {
+
+    final response =  await http.post(url+'/api/autres',body:{'nom':nom}) ;
+    if (response.statusCode == 200) {
+      List jsonResponse = json.decode(response.body);
+      print('urgence');
+      print(jsonResponse[0]);
       List a = jsonResponse[0]['results'] ;
       return a.map((job) => new Demande.fromJson(job)).toList();
     } else {

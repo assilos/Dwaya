@@ -33,7 +33,7 @@ class _UsersListPageState extends State<UsersListPage> {
               },
               itemBuilder: (BuildContext context, int index) {
                 return ListTile(
-                  title: Text(_usersList[index].name),
+                  title: Text(_usersList[index].createdAt.toIso8601String()),
                   onTap: () {
 
                     _navigateToChannel(index);
